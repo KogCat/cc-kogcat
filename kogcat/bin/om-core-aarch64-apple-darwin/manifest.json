@@ -1,0 +1,11 @@
+{
+  "version": "0.36.0",
+  "target": "aarch64-apple-darwin",
+  "om_core_bin_url": "https://github.com/KogCat/om-core-binaries/releases/download/v0.36.0/om-core-bin-aarch64-apple-darwin.tar.xz",
+  "om_core_bin_sha256": "1a8d33f0d4dcf09d0cdba763a496383ca8e9e3a22a1287dcbb0999c358b96b3c",
+  "size_bytes": 32593288,
+  "spec": "20",
+  "format": "tar.xz",
+  "build_flags": "fastembed+sqlite-vec bundled",
+  "build_id": "141c2b397340"
+}

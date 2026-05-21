@@ -1,0 +1,15 @@
+{
+  "name": "kogcat",
+  "owner": {
+    "name": "KogCat",
+    "email": "kogcat@users.noreply.github.com"
+  },
+  "plugins": [
+    {
+      "name": "kogcat",
+      "source": "./kogcat",
+      "version": "0.39.3",
+      "description": "本地知识校准层 — AI 回答自动比对个人知识库，支持直接查询与 pack 管理"
+    }
+  ]
+}

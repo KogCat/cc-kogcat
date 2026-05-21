@@ -1,0 +1,36 @@
+{
+  "name": "kogcat",
+  "version": "0.39.2",
+  "description": "AI 回答的本地知识校准层 —— 接入个人知识库做检索、图谱遍历与回答校准，引擎与知识库全程本地，不出机器。",
+  "author": {
+    "name": "KogCat"
+  },
+  "keywords": [
+    "knowledge-base",
+    "rag",
+    "calibration",
+    "local-first",
+    "notes",
+    "memory"
+  ],
+  "mcpServers": "./.mcp.json",
+  "hooks": "./hooks/hooks.codex.json",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "KogCat",
+    "shortDescription": "AI 回答的本地知识校准层",
+    "longDescription": "把个人知识库接入 Codex：用本地引擎对相似概念做检索、图谱遍历与回答校准，并提供 pack 管理与跨会话记忆。引擎二进制与知识库全程留在本机，不上传任何内容。",
+    "developerName": "KogCat",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "结合我的知识库回答这个问题",
+      "查一下我笔记里关于这个主题的内容",
+      "列出我已安装的知识 pack"
+    ]
+  }
+}

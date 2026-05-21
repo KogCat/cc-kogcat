@@ -1,0 +1,20 @@
+{
+  "name": "kogcat",
+  "interface": {
+    "displayName": "KogCat"
+  },
+  "plugins": [
+    {
+      "name": "kogcat",
+      "source": {
+        "source": "local",
+        "path": "./kogcat"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

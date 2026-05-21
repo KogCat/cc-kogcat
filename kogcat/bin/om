@@ -1,0 +1,84 @@
+#!/bin/sh
+# om — dispatcher for kogcat plugin scripts.
+#
+# Claude Code auto-prepends <plugin>/bin to PATH for every Bash tool shell,
+# so users / SKILL.md just call `om <script.py> [args...]` instead of
+# `python3 ${CLAUDE_PLUGIN_ROOT}/scripts/<script.py>` (which requires env
+# propagation that CC 2.1.x doesn't yet do for Bash tool shells).
+#
+# Self-resolves plugin root via $0 (works regardless of CLAUDE_PLUGIN_ROOT
+# being set). Falls back to `python3`; script-specific entry points should
+# still declare their own shebangs.
+#
+# Usage:
+#   om <script.py> [args...]          # run scripts/<script.py> with plugin env
+#   om root                           # print plugin root
+#   om kb                             # print KB_ROOT (from persisted file)
+#   om env                            # print export lines for eval $(om env)
+#   om exec <cmd> [args...]           # run cmd with CLAUDE_PLUGIN_ROOT/DATA/KB_ROOT exported
+set -e
+
+self="$0"
+while [ -L "$self" ]; do
+    dir="$(cd "$(dirname "$self")" && pwd)"
+    self="$(readlink "$self")"
+    case "$self" in
+        /*) : ;;
+        *) self="$dir/$self" ;;
+    esac
+done
+plugin_root="$(cd "$(dirname "$self")/.." && pwd)"
+
+# Find plugin data dir by convention: ~/.claude/plugins/data/<marketplace>-<plugin>/
+# We know our plugin is om@om, so path is fixed. If CLAUDE_PLUGIN_DATA is
+# set (hook context), prefer that.
+if [ -n "$CLAUDE_PLUGIN_DATA" ]; then
+    plugin_data="$CLAUDE_PLUGIN_DATA"
+else
+    plugin_data="$HOME/.claude/plugins/data/om-om"
+fi
+
+kb_root_file="$plugin_data/kb_root"
+kb_root="${KB_ROOT:-}"
+if [ -z "$kb_root" ] && [ -f "$kb_root_file" ]; then
+    kb_root="$(cat "$kb_root_file")"
+fi
+
+case "$1" in
+    root)
+        printf '%s\n' "$plugin_root"
+        ;;
+    kb)
+        [ -n "$kb_root" ] || { echo "om: KB_ROOT not resolvable; set KB_ROOT or reconfigure the plugin." >&2; exit 1; }
+        printf '%s\n' "$kb_root"
+        ;;
+    env)
+        printf 'export CLAUDE_PLUGIN_ROOT=%s\n' "$(printf '%s' "$plugin_root" | sed "s/'/'\\\\''/g; s/^/'/; s/\$/'/")"
+        printf 'export CLAUDE_PLUGIN_DATA=%s\n' "$(printf '%s' "$plugin_data" | sed "s/'/'\\\\''/g; s/^/'/; s/\$/'/")"
+        if [ -n "$kb_root" ]; then
+            printf 'export KB_ROOT=%s\n' "$(printf '%s' "$kb_root" | sed "s/'/'\\\\''/g; s/^/'/; s/\$/'/")"
+        fi
+        ;;
+    exec)
+        shift
+        [ $# -gt 0 ] || { echo "om exec: missing command" >&2; exit 2; }
+        CLAUDE_PLUGIN_ROOT="$plugin_root" CLAUDE_PLUGIN_DATA="$plugin_data" KB_ROOT="$kb_root" exec "$@"
+        ;;
+    "")
+        echo "om: missing script. Usage: om <script.py> [args...] | om {root,kb,env,exec}" >&2
+        exit 2
+        ;;
+    *.py)
+        script="$1"; shift
+        target="$plugin_root/scripts/$script"
+        [ -f "$target" ] || { echo "om: no such script: $target" >&2; exit 2; }
+        CLAUDE_PLUGIN_ROOT="$plugin_root" CLAUDE_PLUGIN_DATA="$plugin_data" KB_ROOT="$kb_root" exec python3 "$target" "$@"
+        ;;
+    *)
+        # Convenience: om <name> → om <name>.py
+        script="$1.py"; shift
+        target="$plugin_root/scripts/$script"
+        [ -f "$target" ] || { echo "om: unknown subcommand or script: $1 (looked for $target)" >&2; exit 2; }
+        CLAUDE_PLUGIN_ROOT="$plugin_root" CLAUDE_PLUGIN_DATA="$plugin_data" KB_ROOT="$kb_root" exec python3 "$target" "$@"
+        ;;
+esac

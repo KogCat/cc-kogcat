@@ -1,0 +1,4 @@
+# spec 18 §A10 — om-core-bin 不再 git-tracked，由 bootstrap_om_core_bin.py
+# 按 manifest.json 从 GH Release Asset fetch。本地 dev build 也写到这里
+# 但不进 git；sha256 与 manifest 匹配时启动直接用本地。
+om-core-bin

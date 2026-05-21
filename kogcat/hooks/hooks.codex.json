@@ -1,0 +1,45 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/hooks/write_config.py",
+            "statusMessage": "kogcat: 配置 KB 路径"
+          },
+          {
+            "type": "command",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/hooks/bootstrap_om_core_bin.py",
+            "statusMessage": "kogcat: 检查 om-core 二进制"
+          },
+          {
+            "type": "command",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/hooks/cleanup_legacy_sidecars.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/hooks/install_om_service.py",
+            "statusMessage": "kogcat: 守护 om-core 服务"
+          },
+          {
+            "type": "command",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/hooks/inject_memory.py",
+            "statusMessage": "kogcat: 加载记忆索引"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|Bash|Execute",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/hooks/guard_protected.py"
+          }
+        ]
+      }
+    ]
+  }
+}

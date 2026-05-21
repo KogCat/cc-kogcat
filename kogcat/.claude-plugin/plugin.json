@@ -1,0 +1,28 @@
+{
+  "name": "kogcat",
+  "version": "0.39.3",
+  "description": "AI 回答的本地知识校准层 — ambient 模式自动比对，/kogcat:query 直接查询，引擎本地运行，知识库不出机器。",
+  "author": {
+    "name": "KogCat"
+  },
+  "userConfig": {
+    "kb_root": {
+      "type": "string",
+      "title": "知识库根目录",
+      "description": "Absolute path to your knowledge base data root (directory containing vertical folders like R/, W/, M/, .archive/ and kb.db).",
+      "required": true
+    },
+    "hf_endpoint": {
+      "type": "string",
+      "title": "HuggingFace 镜像 (可选)",
+      "description": "首次启动会从 HuggingFace 下载 ~90MB 嵌入模型。CN 用户建议填 https://hf-mirror.com（典型从超时改善到 1-3 分钟完成）。海外用户留空。一旦模型缓存命中，本字段不再生效。",
+      "required": false
+    }
+  },
+  "mcpServers": {
+    "kogcat": {
+      "command": "python3",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/scripts/mcp_server.py"]
+    }
+  }
+}
