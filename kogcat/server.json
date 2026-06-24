@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.kogcat/kogcat-mcp",
+  "description": "Local-first judgment layer: counter-examples & blind spots from your own knowledge base.",
+  "repository": {
+    "url": "https://github.com/KogCat/cc-kogcat",
+    "source": "github"
+  },
+  "version": "0.46.2",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "kogcat-mcp",
+      "version": "0.46.2",
+      "transport": { "type": "stdio" }
+    }
+  ]
+}

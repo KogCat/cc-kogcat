@@ -1,0 +1,10 @@
+{
+  "version": "0.35.4",
+  "target": "x86_64-apple-darwin",
+  "om_core_bin_url": "https://github.com/KogCat/om-core-binaries/releases/download/v0.35.4/om-core-bin-x86_64-apple-darwin",
+  "om_core_bin_sha256": "7f94a902a73f199e41e806fd0258822c8f4d097f74a071bc2ea1805860801c8c",
+  "size_bytes": 39288208,
+  "spec": "19",
+  "build_flags": "fastembed+sqlite-vec bundled",
+  "build_id": "f21d8e87d358"
+}

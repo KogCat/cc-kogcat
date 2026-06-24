@@ -1,0 +1,15 @@
+{
+  "name": "kogcat",
+  "owner": {
+    "name": "KogCat",
+    "email": "kogcat@users.noreply.github.com"
+  },
+  "plugins": [
+    {
+      "name": "kogcat",
+      "source": "./kogcat",
+      "version": "0.46.6",
+      "description": "一个有态度的思考伙伴。AI 给答案，它带来判断——长期原则、反模式、被忽略的边界。全程本地。"
+    }
+  ]
+}

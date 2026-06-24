@@ -1,0 +1,12 @@
+{
+  "version": "0.36.59",
+  "target": "x86_64-pc-windows-msvc",
+  "om_core_bin_url": "https://github.com/KogCat/om-core-binaries/releases/download/v0.36.59/om-core-bin-x86_64-pc-windows-msvc.zip",
+  "om_core_bin_sha256": "7ee2781758c9266157142098ff87178e1f0a62f7c4806ac25849eb19f3dcf664",
+  "size_bytes": 62439633,
+  "spec": "22",
+  "api_minor": 13,
+  "format": "zip",
+  "build_flags": "fastembed+sqlite-vec bundled",
+  "build_id": "e25773208b60"
+}

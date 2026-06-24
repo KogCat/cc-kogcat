@@ -1,0 +1,22 @@
+{
+  "name": "kogcat",
+  "version": "0.46.6",
+  "description": "一个有态度的思考伙伴 —— AI 给答案，它带入经过时间检验的原则、反模式与边界，帮你判断而不只是接收。引擎与知识全程本地。",
+  "author": {
+    "name": "KogCat"
+  },
+  "userConfig": {
+    "hf_endpoint": {
+      "type": "string",
+      "title": "HuggingFace 镜像 (可选)",
+      "description": "首次启动会从 HuggingFace 下载 ~90MB 嵌入模型。CN 用户建议填 https://hf-mirror.com（典型从超时改善到 1-3 分钟完成）。海外用户留空。一旦模型缓存命中，本字段不再生效。",
+      "required": false
+    }
+  },
+  "mcpServers": {
+    "kogcat": {
+      "command": "python3",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/scripts/mcp_server.py"]
+    }
+  }
+}

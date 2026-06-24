@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kogcat-mcp"
+version = "0.46.2"
+description = "Universal stdio MCP server for the KogCat om-core knowledge sidecar"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "FSL-1.1-MIT" }
+authors = [{ name = "KogCat" }]
+keywords = ["mcp", "kogcat", "knowledge-base", "om-core", "sidecar"]
+classifiers = ["License :: Other/Proprietary License"]
+# stdlib-only by design — the wrapper hand-rolls stdio JSON-RPC + UDS transport.
+dependencies = []
+
+[project.scripts]
+kogcat-mcp = "mcp_server:main"
+
+[tool.setuptools]
+package-dir = { "" = "scripts" }
+# Runtime import closure only (release/CI tools under scripts/ are excluded):
+# entry + binary lifecycle + supervisor + fetcher.
+py-modules = ["mcp_server", "om_core_paths", "om_supervisor", "bin_fetch_common", "_bin_fetch_runner"]
+
+[tool.setuptools.packages.find]
+where = ["scripts"]
+include = ["om_mcp*"]

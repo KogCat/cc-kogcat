@@ -1,0 +1,36 @@
+{
+  "name": "kogcat",
+  "version": "0.46.6",
+  "description": "一个有态度的思考伙伴。AI 给答案，它带来判断——长期原则、反模式、被忽略的边界。全程本地。",
+  "author": {
+    "name": "KogCat"
+  },
+  "keywords": [
+    "knowledge-base",
+    "rag",
+    "calibration",
+    "local-first",
+    "notes",
+    "memory"
+  ],
+  "mcpServers": "./.mcp.json",
+  "hooks": "./hooks/hooks.codex.json",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "KogCat",
+    "shortDescription": "一个有态度的思考伙伴",
+    "longDescription": "AI 回答，KogCat 带来判断。它把长期原则、领域经验和经典反模式带到现场——指出被忽略的边界、踩中的偏差、过短的视野。引擎与知识库全程留在本机，零上传。",
+    "developerName": "KogCat",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "这个方案有没有被忽略的边界或长期代价？",
+      "我该不该这么做？帮我判断一下",
+      "这个决定长期看有什么代价？帮我盘一下利弊"
+    ]
+  }
+}
